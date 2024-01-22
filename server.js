@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+require('dotenv').config();
 const app = express();
 const MongoDBStore = require("connect-mongodb-session")(session);
 
@@ -42,7 +43,7 @@ app.set("view engine", "ejs");
 
 // Set up session middleware
 const store = new MongoDBStore({
-  uri: "mongodb+srv://admin:NbMBPAdnaltxDM92@cluster0.f2l9gud.mongodb.net/?retryWrites=true&w=majority",
+  uri: process.env.MONGO_URI,
   collection: "sessions",
 });
 app.use(
@@ -57,6 +58,8 @@ app.use(
 
 // Connect to MongoDB
 connect();
+
+const port=process.env.PORT
 
 app.post("/user", (req, res) => {
   if (req.body.username == myusername && req.body.password == mypassword) {
@@ -130,6 +133,6 @@ app.use(contactusRouter);
 // Use the user router to handle requests to /Contact
 app.use(logoutRouter);
 
-app.listen(7000, () => {
-  console.log("Server listening on port http://localhost:7000");
+app.listen(port, () => {
+  console.log(`Server listening on port http://localhost:${port}`);
 });
