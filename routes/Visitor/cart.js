@@ -29,9 +29,8 @@ const { ObjectId } = require("mongodb");
         .toArray();
 
       let total = 0;
-      products.forEach((product) => (total += product.offer));
-      console.log(total);
-
+      products.forEach((product) => (total += Number(product.offer))); // Modified line
+      // console.log(total);
       let loggedInUser = await userCollection.findOne({
         _id: new ObjectId(req.session.username),
       });
@@ -39,13 +38,16 @@ const { ObjectId } = require("mongodb");
       if (req.session.role == "visitor") {
         cartItemCount = loggedInUser.cart.length;
       }
+      //  console.log(user);
+      // console.log(req.session);
+      
       res.render("visitor/cart", {
-        loggedIn: req.session.username ? true : false,
         user: user,
         products: products,
         total: total,
-        cartCount: cartItemCount,
+        loggedIn: req.session.username ? true : false,
         logo: loggedInUser,
+        cartCount: cartItemCount,
       });
     });
 

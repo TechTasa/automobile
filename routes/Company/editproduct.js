@@ -25,7 +25,7 @@ const upload = multer({ storage: storage });
     router.get("/product/:userId/:productId", async (req, res) => {
       const userId = req.params.userId;
       const productId = req.params.productId;
-      console.log(userId, productId);
+      // console.log(userId, productId);
       // Find the product in the database
       const product = await productsCollection.findOne({
         _id: new ObjectId(productId),
@@ -59,7 +59,7 @@ const upload = multer({ storage: storage });
         }
         // Get the updated product data from the request body
         const updatedProductData = req.body;
-        console.log(updatedProductData);
+        // console.log(updatedProductData);
         // Update the product in the database
         await productsCollection.updateOne(
           { _id: new ObjectId(productId), createdBy: userId },

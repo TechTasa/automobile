@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auto Mobile</title>
+    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body{
@@ -38,11 +38,6 @@
                    
                    transition: all 1s ease-out;
                   }
-                  @media (max-width: 1170px) {
-                .responsive-image {
-                  content: url('/uploads/AUTO\ MOBILE\ TOOL\ SMALL\ LOGO.png');
-                }
-              }
                 </style>
                 <span class="sr-only">Open main menu</span>
                 <!--
@@ -65,7 +60,8 @@
             </div>
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div class="flex flex-shrink-0 items-center">
-                <img class="h-8 w-auto responsive-image" src="/uploads/AUTO MOBILE TOOL LOGO.png" alt="Your Company">
+                <img class="h-8 w-auto" src="/marketingtool-logo2.png"
+              alt="Your Company">
               </div>
               <div class="hidden sm:ml-6 sm:block">
                 <div class="flex space-x-4">
@@ -74,7 +70,7 @@
                   <a href="/profile/<%= user._id %>" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Profile</a>
                   <a href="/cover/<%= user._id %>" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Cover Pictures</a>
                   <a href="/logo/<%= user._id %>" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Logo</a>
-                  <a href="/product/<%= user._id %>" class=" bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium aria-current="page">My Products</a>
+                  <a href="/products/<%= user._id %>" class=" bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium aria-current="page">My Products</a>
                 </div>
               </div>
             </div>
@@ -85,7 +81,7 @@
                   <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                     <span class="absolute -inset-1.5"></span>
                     <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" src="https://picsum.photos/32/32/?random" alt="">
+                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                   </button>
                 </div>
       
@@ -157,10 +153,10 @@
                   <img id="productimage" src="<%= product.logo1 ? '/' + product.logo1 : 'https://i.ibb.co/kSZwvxX/addLogo.png' %>" alt="LOGO/Thumbnail">
 
                 </div>
-                <h3 class="mt-4 text-sm text-white"><%= product.name %></h3>
-                <p class="mt-1 text-lg font-medium text-white">Slogan: <%= product.slogan %></p>
-                <p class="mt-1 text-lg font-medium text-white">Website: <%= product.websitelink %></p>
-                <p class="mt-1 text-lg font-medium text-white">Address: <%= product.address %></p>
+                <h3 class="mt-4 text-sm text-white"><%= product.productName %></h3>
+                <p class="mt-1 text-lg font-medium text-white">Price: <%= product.offer %></p>
+                <p class="mt-1 text-lg font-medium text-white">Category: <%= product.category %></p>
+                <p class="mt-1 text-lg font-medium text-white">Brand: <%= product.brand %></p>
                 <!-- <p class="mt-1 text-lg font-medium text-white">Description: <%= product.discription %></p> -->
               </a>
               <form action="/product/delete/<%= user._id %>/<%= product._id %>" method="post" onsubmit="return confirm('Are you sure you want to delete this product?')">

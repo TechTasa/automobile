@@ -22,20 +22,12 @@ const { ObjectId } = require("mongodb");
         if (!product) {
           return res.status(404).send({ message: "Product not found" });
         }
-        let loggedInUser = await userCollection.findOne({
-          _id: new ObjectId(req.session.username),
-        });
-        let cartItemCount = 0;
-        if (req.session.role == "visitor") {
-          cartItemCount = loggedInUser.cart.length;
-        }
+        // console.log(req.session.username);
+        
         res.render("product", {
-          loggedIn: req.session.username ? true : false,
-          user: req.session,
           product: product,
-          logo: loggedInUser,
           createdBy: createdByName,
-          cartCount: cartItemCount,
+          user: req.session,
         });
       } catch (error) {
         res.status(500).send({ message: "Server error" });
