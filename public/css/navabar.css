@@ -1,0 +1,239 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
+html {
+  font-size: 62.5%;
+}
+
+.hide-mobile {
+  display: none;
+}
+
+body {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 2.5em;
+  border-radius: 1rem;
+}
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header a.logo {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color:white;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 45%;
+  z-index: 2;
+  transform: translateX(100%);
+  transition: translateX .5s ease-in-out;
+}
+
+.toggle-menu {
+  transform: translateX(0);
+  background-color: black;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5em;
+}
+
+.close {
+  cursor: pointer;
+    display: block;
+    margin: 4em auto;
+}
+
+nav ul li a {
+  font-size: 15px;
+  color: white;
+  font-weight: 700;
+}
+
+nav ul li.active {
+    font-weight: bold;
+}
+.search {
+  grid-column: span 2;
+  order: 3;
+  width: 100%;
+  height: auto;
+  /* margin: 0 auto; */
+  padding-block: 1rem;
+}
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  padding-inline: 1.5rem;
+  border-radius: 3rem;
+  background: var(--color-white-200);
+}
+.search-input {
+  display: block;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: inherit;
+  width: 100%;
+  height: 100%;
+  padding-block: 0.75rem;
+  border: none;
+  outline: none;
+  color: black;
+  background: white;
+  padding: 15px;
+  /* border-radius: 5px; */
+}
+button {
+  border: 1px solid white;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  gap: 0.4em;
+  color: #000;
+  font-size: 1.8rem;
+  background: none;
+  padding: 9px;
+}
+.search-submit {
+  font-size: 1.25rem;
+  color: var(--color-white-500);
+  background: white;
+  padding: 14px;
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .search {
+    display: none;
+  }
+}
+@media only screen and (min-width: 62rem) {
+  .search {
+    justify-self: center;
+    grid-column: initial;
+    order: initial;
+    width: 30%;
+    height: auto;
+    /* display: none; */
+  }
+  .search-form {
+    max-width: 30rem;
+  }
+}
+
+.btn {
+  display: flex;
+  gap: 2.2em;
+}
+
+.button {
+  border: 1px solid white;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  gap: 0.4em;
+  border-radius: 2.4em;
+  color: #000;
+  font-size: 1.8rem;
+  background: none;
+}
+.submit1 {
+
+    padding: 0.4em 0.8em;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    padding: 9px;
+  }
+  i.fa.fa-bars {
+    color: white;
+}
+i.fa.fa-user-o {
+  border: 1px solid white;
+  border-radius: 50px;
+  padding: 5px;
+  background: white;
+}
+button p {
+  margin: 0;
+}
+
+/* 
+span {
+    width: 450px;
+    height: 35px;
+    margin-top: 9.7em;
+    margin-left: 12.2em;
+    border-radius: 4.5em;
+} */
+
+.spTwo {
+    width: 300px;
+    margin-top: 2.4em;
+} 
+
+@media (min-width: 700px) {
+  .hamburger, .close {
+    display: none;
+  }
+  
+  .hide-mobile {
+    display: block;
+  }
+  
+  nav {
+    position: unset;
+    height: auto;
+    background: none;
+    width: auto;
+    transform: translateX(0);
+  }
+  nav ul {
+    flex-direction: row;
+    gap: 3.6em;
+  }
+  
+  nav ul li.active {
+    font-weight: bold;
+    border-bottom: 2px solid #0460bc;
+  }
+}

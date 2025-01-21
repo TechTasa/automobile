@@ -214,10 +214,10 @@
       <div class="flex-1">
         <% products.forEach(function(product) { %>
           <div class="flex flex-col md:flex-row items-center border-b py-4">
-            <img class="w-24 h-24 object-cover" src="<%= product.logo1 ? '/' + product.logo1 : 'https://i.ibb.co/kSZwvxX/addLogo.png' %>" alt="<%= product.name %>"/>
+            <img class="w-24 h-24 object-cover" src="<%= product.mainImage ? '/' + product.mainImage : 'https://i.ibb.co/kSZwvxX/addLogo.png' %>" alt="<%= product.name %>"/>
             <div class="ml-0 md:ml-4 mt-4 md:mt-0 text-center md:text-left">
-              <h2 class="text-xl font-bold"><%= product.productName %></h2>
-              <p class="text-gray-600"><%= product.category %></p>
+              <h2 class="text-xl font-bold"><%= product.name %></h2>
+              <p class="text-gray-600"><%= product.make %></p>
             </div>
             <div class="ml-0 md:ml-auto mt-4 md:mt-0 flex items-center justify-center md:justify-start w-full md:w-auto">
               <div class="flex items-center border px-2 py-1">
