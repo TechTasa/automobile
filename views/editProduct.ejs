@@ -103,157 +103,191 @@
         </div>
             </nav>
 <form id="edit-form" method="POST" enctype="multipart/form-data" action="/product/<%= product.createdBy %>/<%= product._id %>">
-  <div class="border-b border-white/10 pb-12">
-    <h2 class="text-base font-semibold leading-7 text-white">Product Information</h2>
-    <p class="mt-1 text-sm leading-6 text-white">Edit Your Product</p>
+  <div class="border-b border-white/10 pb-12 max-w-7xl mx-auto p-6">
+    <h2 class="text-2xl font-semibold leading-7 text-white">Vehicle Information</h2>
+    <p class="mt-1 text-sm leading-6 text-white">Edit Your Vehicle</p>
 
-    <!-- Images Section -->
-    <div class="flex flex-wrap gap-4">
-      <div class="sm:col-span-1">
-        <label for="logo1" class="block text-sm font-medium leading-6 text-white">Logo/Thumbnail</label>
-        <div class="mt-2">
-          <input id="logo1" type="file" name="logo1" class="hidden" />
-          <label for="logo1">
-            <img id="preview1" src="<%= product.logo1 ? '/' + product.logo1 : 'https://i.ibb.co/kSZwvxX/addLogo.png' %>" alt="Add logo 1" 
-              class="cursor-pointer bg-gray-700 border py-3 my-2 mx-3 px-5 text-grey-darkest text-white rounded hover:bg-gray-900"/>
+    <div class="mt-8">
+      <h3 class="text-lg font-medium leading-6 text-white mb-4">Vehicle Images</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-white mb-2">Main Image*</label>
+          <input type="file" name="mainImage" id="mainImage" class="hidden" accept="image/*" />
+          <label for="mainImage" class="cursor-pointer block">
+            <img id="mainPreview" src="<%= product.mainImage ? '/' + product.mainImage : 'https://i.ibb.co/kSZwvxX/addLogo.png' %>" alt="Add main image" 
+              class="w-full h-48 object-cover rounded-lg border-2 border-dashed border-gray-300 hover:border-indigo-500 transition-colors" />
           </label>
         </div>
-      </div>
-
-      <div class="sm:col-span-1">
-        <label for="logo2" class="block text-sm font-medium leading-6 text-white">Picture 1</label>
-        <div class="mt-2">
-          <input id="logo2" type="file" name="logo2" class="hidden" />
-          <label for="logo2">
-            <img id="preview2" src="<%= product.logo2 ? '/' + product.logo2 : 'https://i.ibb.co/hdMGGR4/carousel-1-1.png' %>" alt="Add logo 2"
-              class="cursor-pointer bg-gray-700 border py-3 my-2 mx-3 px-5 text-grey-darkest text-white rounded hover:bg-gray-900"/>
-          </label>
-        </div>
-      </div>
-
-      <div class="sm:col-span-1">
-        <label for="logo3" class="block text-sm font-medium leading-6 text-white">Picture 2</label>
-        <div class="mt-2">
-          <input id="logo3" type="file" name="logo3" class="hidden" />
-          <label for="logo3">
-            <img id="preview3" src="<%= product.logo3 ? '/' + product.logo3 : 'https://i.ibb.co/hdMGGR4/carousel-1-1.png' %>" alt="Add logo 3"
-              class="cursor-pointer bg-gray-700 border py-3 my-2 mx-3 px-5 text-grey-darkest text-white rounded hover:bg-gray-900"/>
-          </label>
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-white">Additional Images</label>
+          <div class="grid grid-cols-2 gap-2">
+            <% for(let i = 1; i <= 6; i++) { %>
+            <input type="file" name="image<%= i %>" id="image<%= i %>" class="hidden" accept="image/*" />
+            <label for="image<%= i %>" class="cursor-pointer block">
+              <img id="preview<%= i %>" src="<%= product['image'+i] ? '/' + product['image'+i] : 'https://i.ibb.co/hdMGGR4/carousel-1-1.png' %>" alt="Add image" 
+                class="w-full h-24 object-cover rounded-lg border border-gray-300 hover:border-indigo-500 transition-colors" />
+            </label>
+            <% } %>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-      <!-- Basic Information -->
-      <div class="sm:col-span-3">
-        <label for="productName" class="block text-sm font-medium leading-6 text-white">Product Name*</label>
-        <div class="mt-2">
-          <input type="text" name="productName" id="productName" value="<%= product.productName %>" required
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-        </div>
-      </div>
 
-      <div class="sm:col-span-3">
-        <label for="brand" class="block text-sm font-medium leading-6 text-white">Brand</label>
-        <div class="mt-2">
-          <input type="text" name="brand" id="brand" value="<%= product.brand %>"
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-        </div>
-      </div>
-
-      <!-- Pricing -->
       <div class="sm:col-span-2">
-        <label for="basePrice" class="block text-sm font-medium leading-6 text-white">Base Price*</label>
-        <div class="mt-2">
-          <input type="number" name="price" id="basePrice" min="0" step="0.01" value="<%= product.price %>" required
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-        </div>
+        <label for="name" class="block text-sm font-medium text-white">Product Name*</label>
+        <input type="text" name="name" id="name" value="<%= product.name %>" required 
+          class="mt-2 bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
       </div>
 
       <div class="sm:col-span-2">
-        <label for="discountedPrice" class="block text-sm font-medium leading-6 text-white">Discounted Price</label>
-        <div class="mt-2">
-          <input type="number" name="offer" id="discountedPrice" min="0" step="0.01" value="<%= product.offer %>"
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        <label for="make" class="block text-sm font-medium text-white">Manufacturer*</label>
+        <select name="make" id="make" required class="mt-2 bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <option value="">Select Make</option>
+          <option value="Toyota" <%= product.make === 'Toyota' ? 'selected' : '' %>>Toyota</option>
+          <option value="Honda" <%= product.make === 'Honda' ? 'selected' : '' %>>Honda</option>
+          <option value="Ford" <%= product.make === 'Ford' ? 'selected' : '' %>>Ford</option>
+          <option value="Maruti Suzuki" <%= product.make === 'Maruti Suzuki' ? 'selected' : '' %>>Maruti Suzuki</option>
+          <option value="Hyundai" <%= product.make === 'Hyundai' ? 'selected' : '' %>>Hyundai</option>
+          <option value="Tata" <%= product.make === 'Tata' ? 'selected' : '' %>>Tata</option>
+        </select>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="model" class="block text-sm font-medium text-white">Model*</label>
+        <input type="text" name="model" id="model" value="<%= product.model %>" required 
+          class="mt-2 bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="year" class="block text-sm font-medium text-white">Year*</label>
+        <input type="number" name="year" id="year" min="1900" max="2025" value="<%= product.year %>" required 
+          class="mt-2 bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="bodyType" class="block text-sm font-medium text-white">Body Type*</label>
+        <select name="bodyType" id="bodyType" required class="mt-2 bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <option value="sedan" <%= product.bodyType === 'sedan' ? 'selected' : '' %>>Sedan</option>
+          <option value="suv" <%= product.bodyType === 'suv' ? 'selected' : '' %>>SUV</option>
+          <option value="hatchback" <%= product.bodyType === 'hatchback' ? 'selected' : '' %>>Hatchback</option>
+          <option value="coupe" <%= product.bodyType === 'coupe' ? 'selected' : '' %>>Coupe</option>
+          <option value="truck" <%= product.bodyType === 'truck' ? 'selected' : '' %>>Truck</option>
+        </select>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="transmission" class="block text-sm font-medium text-white">Transmission*</label>
+        <select name="transmission" id="transmission" required class="mt-2 bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <option value="automatic" <%= product.transmission === 'automatic' ? 'selected' : '' %>>Automatic</option>
+          <option value="manual" <%= product.transmission === 'manual' ? 'selected' : '' %>>Manual</option>
+          <option value="cvt" <%= product.transmission === 'cvt' ? 'selected' : '' %>>CVT</option>
+        </select>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="fuelType" class="block text-sm font-medium text-white">Fuel Type*</label>
+        <select name="fuelType" id="fuelType" required class="mt-2 bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <option value="petrol" <%= product.fuelType === 'petrol' ? 'selected' : '' %>>Petrol</option>
+          <option value="diesel" <%= product.fuelType === 'diesel' ? 'selected' : '' %>>Diesel</option>
+          <option value="electric" <%= product.fuelType === 'electric' ? 'selected' : '' %>>Electric</option>
+          <option value="hybrid" <%= product.fuelType === 'hybrid' ? 'selected' : '' %>>Hybrid</option>
+        </select>
+      </div>
+
+      <div class="col-span-full">
+        <h3 class="text-lg font-medium text-white mb-4">Features</h3>
+        
+        <div class="mb-6">
+          <h4 class="text-sm font-medium text-white mb-2">Safety Features</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[airbags]" class="form-checkbox text-indigo-600" 
+                <%= product.features?.airbags ? 'checked' : '' %>>
+              <span class="text-white">Airbags</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[abs]" class="form-checkbox text-indigo-600"
+                <%= product.features?.abs ? 'checked' : '' %>>
+              <span class="text-white">ABS</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[parkingSensors]" class="form-checkbox text-indigo-600"
+                <%= product.features?.parkingSensors ? 'checked' : '' %>>
+              <span class="text-white">Parking Sensors</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[backupCamera]" class="form-checkbox text-indigo-600"
+                <%= product.features?.backupCamera ? 'checked' : '' %>>
+              <span class="text-white">Backup Camera</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <h4 class="text-sm font-medium text-white mb-2">Comfort Features</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[ac]" class="form-checkbox text-indigo-600"
+                <%= product.features?.ac ? 'checked' : '' %>>
+              <span class="text-white">AC</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[powerWindows]" class="form-checkbox text-indigo-600"
+                <%= product.features?.powerWindows ? 'checked' : '' %>>
+              <span class="text-white">Power Windows</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[powerSeats]" class="form-checkbox text-indigo-600"
+                <%= product.features?.powerSeats ? 'checked' : '' %>>
+              <span class="text-white">Power Seats</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[sunroof]" class="form-checkbox text-indigo-600"
+                <%= product.features?.sunroof ? 'checked' : '' %>>
+              <span class="text-white">Sunroof</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <h4 class="text-sm font-medium text-white mb-2">Entertainment Features</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[bluetooth]" class="form-checkbox text-indigo-600"
+                <%= product.features?.bluetooth ? 'checked' : '' %>>
+              <span class="text-white">Bluetooth</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[navigation]" class="form-checkbox text-indigo-600"
+                <%= product.features?.navigation ? 'checked' : '' %>>
+              <span class="text-white">Navigation</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[premiumSound]" class="form-checkbox text-indigo-600"
+                <%= product.features?.premiumSound ? 'checked' : '' %>>
+              <span class="text-white">Premium Sound</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" name="features[usb]" class="form-checkbox text-indigo-600"
+                <%= product.features?.usb ? 'checked' : '' %>>
+              <span class="text-white">USB Ports</span>
+            </label>
+          </div>
         </div>
       </div>
 
       <div class="sm:col-span-2">
-        <label for="currency" class="block text-sm font-medium leading-6 text-white">Currency</label>
-        <div class="mt-2">
-          <select name="currency" id="currency"
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            <option value="INR" <%= product.currency === 'INR' ? 'selected' : '' %>>INR</option>
-            <option value="USD" <%= product.currency === 'USD' ? 'selected' : '' %>>USD</option>
-            <option value="EUR" <%= product.currency === 'EUR' ? 'selected' : '' %>>EUR</option>
-            <option value="GBP" <%= product.currency === 'GBP' ? 'selected' : '' %>>GBP</option>
-          </select>
-        </div>
-      </div>
+        <label for="price" class="block text-sm font-medium text-white">Price*</label>
+        <input type="number" name="price" id="price" min="0" value="<%= product.price %>" required class="mt-2 bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-in">
+      </div>  
 
-      <!-- Categories and Tags -->
-      <div class="sm:col-span-3">
-        <label for="category" class="block text-sm font-medium leading-6 text-white">Category*</label>
-        <div class="mt-2">
-          <select name="category" id="category" required
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            <option value="">Select a category</option>
-            <option value="Electronics" <%= product.category === 'Electronics' ? 'selected' : '' %>>Electronics</option>
-            <option value="Clothing" <%= product.category === 'Clothing' ? 'selected' : '' %>>Clothing</option>
-            <option value="Home" <%= product.category === 'Home' ? 'selected' : '' %>>Home & Garden</option>
-            <option value="Sports" <%= product.category === 'Sports' ? 'selected' : '' %>>Sports</option>
-            <option value="Books" <%= product.category === 'Books' ? 'selected' : '' %>>Books</option>
-            <option value="Food" <%= product.category === 'Food' ? 'selected' : '' %>>Food & Beverages</option>
-            <option value="Services" <%= product.category === 'Services' ? 'selected' : '' %>>Services</option>
-            <option value="Other" <%= product.category === 'Other' ? 'selected' : '' %>>Other</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="sm:col-span-3">
-        <label for="tags" class="block text-sm font-medium leading-6 text-white">Tags (comma-separated)</label>
-        <div class="mt-2">
-          <input type="text" name="tags" id="tags" value="<%= product.tags %>" placeholder="e.g., organic, handmade, premium"
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-        </div>
-      </div>
-
-      <!-- Additional Information -->
-      <div class="sm:col-span-3">
-        <label for="sku" class="block text-sm font-medium leading-6 text-white">SKU</label>
-        <div class="mt-2">
-          <input type="text" value="<%= product.sku %>" name="sku" id="sku" 
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-        </div>
-      </div>
-
-      <div class="sm:col-span-3">
-        <label for="weight" class="block text-sm font-medium leading-6 text-white">Weight (in kg)</label>
-        <div class="mt-2">
-          <input type="number" name="weight" id="weight" min="0" step="0.01" value="<%= product.weight %>"
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-        </div>
-      </div>
-
-      <div class="sm:col-span-6">
-        <label for="description" class="block text-sm font-medium leading-6 text-white">Description*</label>
-        <div class="mt-2">
-          <textarea name="description" id="description" rows="4" required
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><%= product.description %></textarea>
-        </div>
-      </div>
-
-      <div class="sm:col-span-6">
-        <label for="specifications" class="block text-sm font-medium leading-6 text-white">Specifications</label>
-        <div class="mt-2">
-          <textarea name="specifications" id="specifications" rows="4"
-            class="bg-gray-900 p-2 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            placeholder="Enter product specifications..."><%= product.specifications %></textarea>
-        </div>
-      </div>
-    </div>
-  </div>
-
+      <div class="sm:col-span-2">
+        <label for="offer" class="block text-sm font-medium text-white">Offer*</label>
+        <input type="number" name="offer" id="offer" min="0" value="<%= product.offer %>" required class="mt-2 bg-gray-800 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-in">
+      </div>  
+ 
   <div class="mt-6 flex items-center justify-end gap-x-6">
     <button type="button" class="text-sm font-semibold leading-6 text-white">Cancel</button>
     <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
@@ -261,6 +295,18 @@
 </form>
 
 <script>
+   document.getElementById('mainImage').addEventListener('change', function() {
+    const file = this.files[0];
+    const reader = new FileReader();
+    reader.onloadend = function() {
+      document.getElementById('mainPreview').src = reader.result;
+    }
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      document.getElementById('mainPreview').src = "https://i.ibb.co/kSZwvxX/addLogo.png";
+    }
+  });
   document.querySelectorAll('input[type=file]').forEach(input => {
     input.addEventListener('change', function() {
       const file = this.files[0];

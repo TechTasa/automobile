@@ -1,0 +1,208 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>CarBazar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    .mobile-menu {
+      transform: translateX(-110%);
+      transition: transform 0.3s ease-in-out;
+    }
+    .mobile-menu.open {
+      transform: translateX(-1%);
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="flex flex-col lg:flex-row">
+    <!-- Main Content -->
+    <div class="w-full p-6">
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+        <div class="flex items-center bg-white p-2 rounded-lg shadow-md w-full md:w-1/2 mb-4 md:mb-0">
+          <i class="fas fa-search text-gray-400 mr-2"></i>
+          <input class="w-full border-none focus:outline-none" placeholder="Search here" type="text"/>
+        </div>
+        <button class="lg:hidden bg-purple-600 text-white px-4 py-2 rounded-lg" onclick="toggleMenu()">
+          Filter
+        </button>
+      </div>
+      <div class="flex flex-col lg:flex-row">
+        <!-- Filters -->
+        <div id="mobileMenu" class=" lg:w-1/4 bg-white p-4 rounded-lg shadow-md mb-6 lg:mb-0 mobile-menu lg:static lg:transform-none absolute lg:relative z-50">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-lg font-semibold">Filters</span>
+            <a class="text-purple-600" href="#">Reset All</a>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-gray-600 mb-2">Select Brand</label>
+              <select class="w-full p-2 border rounded-lg">
+                <option>Select Brand</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-gray-600 mb-2">Select Model</label>
+              <select class="w-full p-2 border rounded-lg">
+                <option>Select Model</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-gray-600 mb-2">Price Range</label>
+              <div class="flex justify-between text-gray-600">
+                <span>50,000</span>
+                <span>200,000</span>
+              </div>
+              <input class="w-full" max="200000" min="50000" type="range"/>
+            </div>
+            <div>
+              <label class="block text-gray-600 mb-2">Type</label>
+              <div class="flex space-x-2 overflow-x-auto no-scrollbar">
+                <button class="px-4 py-2 bg-purple-100 text-purple-600 rounded-lg">Sedan</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg">Crossover</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg">Coupe</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg">SUV</button>
+              </div>
+            </div>
+            <div>
+              <label class="block text-gray-600 mb-2">Colors</label>
+              <div class="flex space-x-2">
+                <button class="w-10 h-10 bg-red-500 rounded-full"></button>
+                <button class="w-10 h-10 bg-blue-500 rounded-full"></button>
+                <button class="w-10 h-10 bg-green-500 rounded-full"></button>
+                <button class="w-10 h-10 bg-black rounded-full"></button>
+              </div>
+            </div>
+            <div>
+              <label class="block text-gray-600 mb-2">Release Year</label>
+              <div class="flex justify-between text-gray-600">
+                <span>2020</span>
+                <span>2024</span>
+              </div>
+              <input class="w-full" max="2024" min="2020" type="range"/>
+            </div>
+            <div>
+              <label class="block text-gray-600 mb-2">Showroom Location</label>
+              <input class="w-full p-2 border rounded-lg" placeholder="Search Here" type="text"/>
+            </div>
+            <div>
+              <img alt="Map showing showroom locations" class="w-full rounded-lg" height="200" src="https://storage.googleapis.com/a1aa/image/0WMStDWmPmpTVsvErASQHvjDRVmlLogpEbss35ejbt8.jpg" width="300"/>
+            </div>
+          </div>
+        </div>
+        <!-- Car Listings -->
+        <div class="w-full lg:w-3/4 lg:pl-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-4 rounded-lg shadow-md">
+              <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-500 mr-1"></i>
+                  <span class="text-gray-600">5.0</span>
+                </div>
+                <img alt="BMW Logo" class="w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/EbZAaAH-brbiq_sJ7mIdBS-Yp6O6dTcdGUTdOeulCok.jpg" width="40"/>
+              </div>
+              <img alt="Red BMW iX Sports Activity Vehicle" class="w-full rounded-lg mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/pb07zpXyJ4HtBhgJ_e4wUwUkiobRuYgbdWOvyF1f2ak.jpg" width="300"/>
+              <div class="text-gray-800 font-semibold mb-2">$87,250</div>
+              <div class="text-gray-600 mb-4">iX Sports Activity Vehicle</div>
+              <div class="text-gray-500 mb-4">The all-electric SAV setting standards for aerodynamics, technology, and luxury.</div>
+              <button class="bg-purple-600 text-white px-4 py-2 rounded-lg">Check Details</button>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+              <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-500 mr-1"></i>
+                  <span class="text-gray-600">5.0</span>
+                </div>
+                <img alt="BMW Logo" class="w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/EbZAaAH-brbiq_sJ7mIdBS-Yp6O6dTcdGUTdOeulCok.jpg" width="40"/>
+              </div>
+              <img alt="Blue BMW i4 Gran Coupe" class="w-full rounded-lg mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/NgrBm11ZpZt124SX3lLXwdOQE1kht-ZlXinZJB1aBoc.jpg" width="300"/>
+              <div class="text-gray-800 font-semibold mb-2">$57,900</div>
+              <div class="text-gray-600 mb-4">i4 Gran Coupe</div>
+              <div class="text-gray-500 mb-4">Cutting-edge all-electric performance in a luxurious four-door sports car.</div>
+              <button class="bg-purple-600 text-white px-4 py-2 rounded-lg">Check Details</button>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+              <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-500 mr-1"></i>
+                  <span class="text-gray-600">5.0</span>
+                </div>
+                <img alt="BMW Logo" class="w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/EbZAaAH-brbiq_sJ7mIdBS-Yp6O6dTcdGUTdOeulCok.jpg" width="40"/>
+              </div>
+              <img alt="Gray BMW XM Sports Activity Vehicle" class="w-full rounded-lg mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/cd3ARGUS1XpA4TYcskQlzApiQ6G1kYo4AOGaDnkRpgA.jpg" width="300"/>
+              <div class="text-gray-800 font-semibold mb-2">$159,000</div>
+              <div class="text-gray-600 mb-4">XM Sports Activity Vehicle</div>
+              <div class="text-gray-500 mb-4">The ultimate expression of performance and luxury, embodied in SAV form.</div>
+              <button class="bg-purple-600 text-white px-4 py-2 rounded-lg">Check Details</button>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+              <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-500 mr-1"></i>
+                  <span class="text-gray-600">5.0</span>
+                </div>
+                <img alt="BMW Logo" class="w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/EbZAaAH-brbiq_sJ7mIdBS-Yp6O6dTcdGUTdOeulCok.jpg" width="40"/>
+              </div>
+              <img alt="Green BMW M2 Coupe" class="w-full rounded-lg mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/Mt0EkPGSmljbNFNN71NCj4Nf7aCAj33XqexlF_XgfcE.jpg" width="300"/>
+              <div class="text-gray-800 font-semibold mb-2">$64,900</div>
+              <div class="text-gray-600 mb-4">M2 Coupe</div>
+              <div class="text-gray-500 mb-4">A high-performance version of the already sporty two-door coupe.</div>
+              <button class="bg-purple-600 text-white px-4 py-2 rounded-lg">Check Details</button>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+              <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-500 mr-1"></i>
+                  <span class="text-gray-600">5.0</span>
+                </div>
+                <img alt="BMW Logo" class="w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/EbZAaAH-brbiq_sJ7mIdBS-Yp6O6dTcdGUTdOeulCok.jpg" width="40"/>
+              </div>
+              <img alt="Green BMW i4 Gran Coupe" class="w-full rounded-lg mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/U8AwClhFdPM-y6vq-2KU3tAuND-c1zam8nEpNado4Hs.jpg" width="300"/>
+              <div class="text-gray-800 font-semibold mb-2">$57,900</div>
+              <div class="text-gray-600 mb-4">i4 Gran Coupe</div>
+              <div class="text-gray-500 mb-4">Cutting-edge all-electric performance in a luxurious four-door sports car.</div>
+              <button class="bg-purple-600 text-white px-4 py-2 rounded-lg">Check Details</button>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+              <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-500 mr-1"></i>
+                  <span class="text-gray-600">5.0</span>
+                </div>
+                <img alt="BMW Logo" class="w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/EbZAaAH-brbiq_sJ7mIdBS-Yp6O6dTcdGUTdOeulCok.jpg" width="40"/>
+              </div>
+              <img alt="White BMW X5 M Sports Activity Vehicle" class="w-full rounded-lg mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/iaja0CBFraQvytq_PKNH_KgZm5-9CPi9ikblfPUexFo.jpg" width="300"/>
+              <div class="text-gray-800 font-semibold mb-2">$124,800</div>
+              <div class="text-gray-600 mb-4">X5 M Sports Activity Vehicle</div>
+              <div class="text-gray-500 mb-4">The dominant SAV primed with the performance of M.</div>
+              <button class="bg-purple-600 text-white px-4 py-2 rounded-lg">Check Details</button>
+            </div>
+          </div>
+          <div class="flex justify-center mt-6">
+            <button class="bg-purple-600 text-white px-6 py-3 rounded-lg">Explore More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>

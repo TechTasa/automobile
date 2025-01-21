@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <form id="create-car-listing" method="POST" enctype="multipart/form-data" action="/car/create">
+        <div class="bg-gray-900 p-8 rounded-lg">
+          <h2 class="text-2xl font-bold text-white mb-6">Create Car Listing</h2>
+      
+          <!-- Image Upload Section -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-white mb-4">Vehicle Images</h3>
+            <div class="grid grid-cols-4 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-white mb-2">Front View*</label>
+                <input type="file" name="frontView" accept="image/*" required class="hidden" id="frontView">
+                <label for="frontView" class="block cursor-pointer">
+                  <img id="frontViewPreview" src="/placeholder-image.png" 
+                       class="w-full h-48 object-cover rounded-lg border-2 border-gray-700 hover:border-indigo-500">
+                </label>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-white mb-2">Side View*</label>
+                <input type="file" name="sideView" accept="image/*" required class="hidden" id="sideView">
+                <label for="sideView" class="block cursor-pointer">
+                  <img id="sideViewPreview" src="/placeholder-image.png" 
+                       class="w-full h-48 object-cover rounded-lg border-2 border-gray-700 hover:border-indigo-500">
+                </label>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-white mb-2">Interior View*</label>
+                <input type="file" name="interiorView" accept="image/*" required class="hidden" id="interiorView">
+                <label for="interiorView" class="block cursor-pointer">
+                  <img id="interiorViewPreview" src="/placeholder-image.png" 
+                       class="w-full h-48 object-cover rounded-lg border-2 border-gray-700 hover:border-indigo-500">
+                </label>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-white mb-2">Additional View</label>
+                <input type="file" name="additionalView" accept="image/*" class="hidden" id="additionalView">
+                <label for="additionalView" class="block cursor-pointer">
+                  <img id="additionalViewPreview" src="/placeholder-image.png" 
+                       class="w-full h-48 object-cover rounded-lg border-2 border-gray-700 hover:border-indigo-500">
+                </label>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Vehicle Details Section -->
+          <div class="grid grid-cols-3 gap-4 mb-6">
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Manufacturer*</label>
+              <select name="manufacturer" required class="w-full bg-gray-800 text-white p-2 rounded">
+                <option value="">Select Manufacturer</option>
+                <option value="toyota">Toyota</option>
+                <option value="honda">Honda</option>
+                <option value="ford">Ford</option>
+                <!-- Add more manufacturers -->
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Model*</label>
+              <input type="text" name="model" required 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Year*</label>
+              <select name="year" required class="w-full bg-gray-800 text-white p-2 rounded">
+                <!-- Dynamically generate years -->
+                <script>
+                  const yearSelect = document.querySelector('select[name="year"]');
+                  const currentYear = new Date().getFullYear();
+                  for (let year = currentYear; year >= 1990; year--) {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                  }
+                </script>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Vehicle Condition*</label>
+              <select name="condition" required class="w-full bg-gray-800 text-white p-2 rounded">
+                <option value="new">New</option>
+                <option value="used">Used</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Body Type*</label>
+              <select name="bodyType" required class="w-full bg-gray-800 text-white p-2 rounded">
+                <option value="sedan">Sedan</option>
+                <option value="suv">SUV</option>
+                <option value="hatchback">Hatchback</option>
+                <option value="coupe">Coupe</option>
+                <option value="convertible">Convertible</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">VIN*</label>
+              <input type="text" name="vin" required 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Mileage (km)*</label>
+              <input type="number" name="mileage" required 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Exterior Color*</label>
+              <input type="text" name="exteriorColor" required 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Interior Color*</label>
+              <input type="text" name="interiorColor" required 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+          </div>
+      
+          <!-- Technical Specifications -->
+          <div class="grid grid-cols-3 gap-4 mb-6">
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Transmission*</label>
+              <select name="transmission" required class="w-full bg-gray-800 text-white p-2 rounded">
+                <option value="automatic">Automatic</option>
+                <option value="manual">Manual</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Fuel Type*</label>
+              <select name="fuelType" required class="w-full bg-gray-800 text-white p-2 rounded">
+                <option value="petrol">Petrol</option>
+                <option value="diesel">Diesel</option>
+                <option value="electric">Electric</option>
+                <option value="hybrid">Hybrid</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Engine Capacity (CC)</label>
+              <input type="number" name="engineCapacity" 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+          </div>
+      
+          <!-- Pricing Section -->
+          <div class="grid grid-cols-3 gap-4 mb-6">
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Ex-showroom Price*</label>
+              <input type="number" name="exShowroomPrice" required 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">On-road Price*</label>
+              <input type="number" name="onRoadPrice" required 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Lease Options</label>
+              <input type="text" name="leaseOptions" 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Financing Information</label>
+              <input type="text" name="financingInfo" 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Trade-in Value</label>
+              <input type="number" name="tradeInValue" 
+                     class="w-full bg-gray-800 text-white p-2 rounded">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-white mb-2">Price Negotiability</label>
+              <select name="priceNegotiable" class="w-full bg-gray-800 text-white p-2 rounded">
+                <option value="negotiable">Negotiable</option>
+                <option value="fixed">Fixed</option>
+              </select>
+            </div>
+          </div>
+      
+          <!-- Features Section -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-white mb-4">Features & Equipment</h3>
+            <div class="grid grid-cols-3 gap-4">
+              <div>
+                <h4 class="text-md font-semibold text-white mb-2">Safety Features</h4>
+                <div class="flex flex-col">
+                  <label><input type="checkbox" name="safetyFeatures" value="airbags"> Airbags</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="abs"> Anti-lock Braking System (ABS)</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="esc"> Electronic Stability Control (ESC)</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="tractionControl"> Traction Control</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="parkingSensors"> Parking Sensors</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="backupCamera"> Backup Camera</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="blindSpotDetection"> Blind Spot Detection</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="laneDepartureWarning"> Lane Departure Warning</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="emergencyBrakeAssist"> Emergency Brake Assist</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="tirePressureMonitoring"> Tire Pressure Monitoring</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="childSafetyLocks"> Child Safety Locks</label>
+                  <label><input type="checkbox" name="safetyFeatures" value="isofix"> ISOFIX Child Seat Anchors</label>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-md font-semibold text-white mb-2">Entertainment Features</h4>
+                <div class="flex flex-col">
+                  <label><input type="checkbox" name="entertainmentFeatures" value="infotainmentSystem"> Infotainment System</label>
+                  <label><input type="checkbox" name="entertainmentFeatures" value="navigationSystem"> Navigation System</label>
+                  <label><input type="checkbox" name="entertainmentFeatures" value="bluetooth"> Bluetooth Connectivity</label>
+                  <label><input type="checkbox" name="entertainmentFeatures" value="usbPorts"> USB Ports</label>
+                  <label><input type="checkbox" name="entertainmentFeatures" value="smartphoneIntegration"> Smartphone Integration</label>
+                  <label><input type="checkbox" name="entertainmentFeatures" value="premium SoundSystem"> Premium Sound System</label>
+                  <label><input type="checkbox" name="entertainmentFeatures" value="numberOfSpeakers"> Number of Speakers</label>
+                  <label><input type="checkbox" name="entertainmentFeatures" value="rearEntertainmentSystem"> Rear Entertainment System</label>
+                  <label><input type="checkbox" name="entertainmentFeatures" value="radio"> Radio (AM/FM/Satellite)</label>
+                  <label><input type="checkbox" name="entertainmentFeatures" value="voiceControl"> Voice Control</label>
+                  <label><input type="checkbox" name="entertainmentFeatures" value="touchscreenDisplay"> Touchscreen Display</label>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-md font-semibold text-white mb-2">Comfort Features</h4>
+                <div class="flex flex-col">
+                  <label><input type="checkbox" name="comfortFeatures" value="airConditioning"> Air Conditioning</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="powerWindows"> Power Windows</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="powerDoorLocks"> Power Door Locks</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="powerSeats"> Power Seats</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="seatMaterial"> Seat Material</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="heatedSeats"> Heated Seats</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="ventilatedSeats"> Ventilated Seats</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="memorySeats"> Memory Seats</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="sunroof"> Sunroof/Moonroof</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="cruiseControl"> Cruise Control</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="steeringMountedControls"> Steering Mounted Controls</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="autoDimmingMirrors"> Auto-dimming Mirrors</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="keylessEntry"> Keyless Entry</label>
+                  <label><input type="checkbox" name="comfortFeatures" value="pushButtonStart"> Push Button Start</label>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Additional Accessories Section -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-white mb-4">Additional Accessories</h3>
+            <div class="flex flex-col">
+              <label><input type="checkbox" name="additionalAccessories" value="roofRack"> Roof Rack</label>
+              <label><input type="checkbox" name="additionalAccessories" value="towPackage"> Tow Package</label>
+              <label><input type="checkbox" name="additionalAccessories" value="customWheels"> Custom Wheels</label>
+              <label><input type="checkbox" name="additionalAccessories" value="windowTint"> Window Tint</label>
+              <label><input type="checkbox" name="additionalAccessories" value="bodyKit"> Body Kit Modifications</label>
+              <label><input type="checkbox" name="additionalAccessories" value="floorMats"> Floor Mats</label>
+              <label><input type="checkbox" name="additionalAccessories" value="cargoLiner"> Cargo Liner</label>
+              <label><input type="checkbox" name="additionalAccessories" value="dashCamera"> Dash Camera</label>
+              <label><input type="checkbox" name="additionalAccessories" value="paintProtection"> Paint Protection</label>
+              <label><input type="checkbox" name="additionalAccessories" value="extendedWarranties"> Extended Warranties</label>
+              <label><input type="checkbox" name="additionalAccessories" value="securitySystem"> Security System</label>
+              <label><input type="checkbox" name="additionalAccessories" value="customLighting"> Custom Lighting</label>
+            </div>
+          </div>
+      
+          <!-- Documentation Upload Section -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-white mb-4">Documentation Upload</h3>
+            <div class="flex flex-col">
+              <label class="block text-sm font-medium text-white mb-2">Service History</label>
+              <input type="file" name="serviceHistory" accept="application/pdf,image/*" class="bg-gray-800 text-white p-2 rounded mb-4">
+              
+              <label class="block text-sm font-medium text-white mb-2">Insurance Details</label>
+              <input type="file" name="insuranceDetails" accept="application/pdf,image/*" class="bg-gray-800 text-white p-2 rounded mb-4">
+              
+              <label class="block text-sm font-medium text-white mb-2">Registration Documents</label>
+              <input type="file" name="registrationDocuments" accept="application/pdf,image/*" class="bg-gray-800 text-white p-2 rounded mb-4">
+              
+              <label class="block text-sm font-medium text-white mb-2">Inspection Report</label>
+              <input type="file" name="inspectionReport" accept="application/pdf,image/*" class="bg-gray-800 text-white p-2 rounded mb-4">
+            </div>
+          </div>
+      
+          <!-- Submit Button -->
+          <div>
+            <button type="submit" class="w-full bg-indigo-600 text-white p-2 rounded hover:bg-indigo-700">Submit Listing</button>
+          </div>
+        </div>
+      </form>
+</body>
+</html>

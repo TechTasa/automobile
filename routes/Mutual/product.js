@@ -24,6 +24,7 @@ const { ObjectId } = require("mongodb");
         }
         // console.log(req.session.username);
         
+        
         res.render("product", {
           product: product,
           createdBy: createdByName,

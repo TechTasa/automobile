@@ -393,13 +393,13 @@
             <div class="my-1 px-1 w-full md:w-1/3 lg:my-4 lg:px-4 lg:w-1/3">
               <article class="overflow-hidden rounded-lg shadow-lg bg-gray-200 h-full flex flex-col">
                 <a href="/product/<%= product._id %>" class="h-64 overflow-hidden">
-                  <img alt="Product Image" class="block w-full h-full object-contain p-4" src="../<%= product.logo1 ? '' + product.logo1 : 'https://i.ibb.co/kSZwvxX/addLogo.png' %>">
+                  <img alt="Product Image" class="block w-full h-full object-contain p-4" src="../<%= product.mainImage ? '' + product.mainImage : 'https://i.ibb.co/kSZwvxX/addLogo.png' %>">
                 </a>
 
                 <header class="flex flex-col p-2 md:p-4 flex-grow">
                   <h1 class="text-lg truncate w-full mb-2">
                     <a class="no-underline hover:underline text-gray-700" href="/product/<%= product._id %>">
-                      <%= product.productName.length > 20 ? product.productName.substring(0, 20) + '...' : product.productName %>
+                      <%= product.name.length > 20 ? product.name.substring(0, 20) + '...' : product.name %>
                     </a>
                   </h1>
                   <div class="flex flex-col gap-1">

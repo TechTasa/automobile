@@ -6,9 +6,14 @@ const { connect, getCollection } = require("../../db");
 const { ObjectId } = require("mongodb");
 const multer = require("multer");
 
+const fs = require('fs');
+const path = require('path');
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    const dir = 'uploads/cars/';
+    fs.mkdirSync(dir, { recursive: true });
+    cb(null, dir);
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -39,23 +44,39 @@ const upload = multer({ storage: storage });
     router.post(
       "/product/:userId/:productId",
       upload.fields([
-        { name: "logo1", maxCount: 1 },
-        { name: "logo2", maxCount: 1 },
-        { name: "logo3", maxCount: 1 },
+        { name: "mainImage", maxCount: 1 },
+        { name: "image1", maxCount: 1 },
+        { name: "image2", maxCount: 1 },
+        { name: "image3", maxCount: 1 },
+        { name: "image4", maxCount: 1 },
+        { name: "image5", maxCount: 1 },
+        { name: "image6", maxCount: 1 },
       ]),
       async (req, res) => {
         const userId = req.params.userId;
         const productId = req.params.productId;
         // console.log("File PAth", req.file.path);
         // Assuming 'cover' is the name of the form field in your client-side form
-        if (req.files["logo1"]) {
-          req.body.logo1 = req.files["logo1"][0].path;
+        if (req.files["mainImage"]) {
+          req.body.mainImage = req.files["mainImage"][0].path;
         }
-        if (req.files["logo2"]) {
-          req.body.logo2 = req.files["logo2"][0].path;
+        if (req.files["image1"]) {
+          req.body.image1 = req.files["image1"][0].path;
         }
-        if (req.files["logo3"]) {
-          req.body.logo3 = req.files["logo3"][0].path;
+        if (req.files["image2"]) {
+          req.body.image2 = req.files["image2"][0].path;
+        }
+        if (req.files["image3"]) {
+          req.body.image3 = req.files["image3"][0].path;
+        }
+        if (req.files["image4"]) {
+          req.body.image4 = req.files["image4"][0].path;
+        }
+        if (req.files["image5"]) {
+          req.body.image5 = req.files["image5"][0].path;
+        }
+        if (req.files["image6"]) {
+          req.body.image6 = req.files["image6"][0].path;
         }
         // Get the updated product data from the request body
         const updatedProductData = req.body;
